@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/topicEditorScreen">
+
+    <fragment
+        android:id="@+id/topicEditorScreen"
+        android:name="com.example.android.youtubeurlmaker.ui.screens.TopicEditorScreen"
+        android:label="fragment_topic_editor_screen"
+        tools:layout="@layout/fragment_topic_editor_screen" />
+
+    <fragment
+        android:id="@+id/topicListScreen"
+        android:name="com.example.android.youtubeurlmaker.ui.screens.TopicListScreen"
+        android:label="fragment_topic_list"
+        tools:layout="@layout/fragment_topic_list" >
+        <action
+            android:id="@+id/action_topicListScreen_to_topicEditorScreen"
+            app:destination="@id/topicEditorScreen"
+            app:popUpTo="@+id/topicEditorScreen"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.example.android.youtubeurlmaker.ui.screens.SplashScreen"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreen_to_topicListScreen"
+            app:destination="@id/topicListScreen"
+            app:popUpTo="@+id/topicListScreen"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

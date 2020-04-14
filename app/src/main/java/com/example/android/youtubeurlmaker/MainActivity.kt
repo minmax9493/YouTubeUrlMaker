@@ -4,12 +4,37 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
+import android.view.View
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var navigationView: NavigationView
+    lateinit var toolbar: Toolbar
+    lateinit var appBarConfiguration: AppBarConfiguration
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        toolbar = findViewById(R.id.toolbar)
+        toolbar.apply {
+            title = "Tube Note"
+            setSupportActionBar(this)
+        }
+
+        setUpNavigation()
 
         if(intent?.action == Intent.ACTION_SEND) {
             if ("text/plain" == intent.type) {
@@ -23,6 +48,83 @@ class MainActivity : AppCompatActivity() {
             // Update UI to reflect text being shared
             Log.e("MainActivity", "Url: $it")
 
+
+            //https://www.youtube.com/embed/KbINHTeJWQw?start=100&end=120&version=3&autoplay=1
+            //https://www.youtube.com/embed/[video_id]?start=[start_at_second]&end=[end_at_second]
+
+//            https://stackoverflow.com/questions/4661905/how-to-customize-an-end-time-for-a-youtube-video
+
+
         }
+    }
+
+    private fun setUpNavigation(){
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigation_view)
+        navController = findNavController(R.id.nav_host_fragment)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            navigationView.visibility = View.GONE
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            when(destination.id){
+                R.id.splashScreen->supportActionBar?.hide()
+                R.id.topicListScreen->{
+                    supportActionBar?.show()
+                    navigationView.visibility = View.VISIBLE
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED)
+                }else->{
+                supportActionBar?.show()
+            }
+            }
+        }
+
+        navigationView.setNavigationItemSelectedListener(this)
+
+        val topLevelDestinations = setOf(R.id.topicListScreen, R.id.topicEditorScreen)
+        appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations)
+            .setDrawerLayout(drawerLayout)
+            .build()
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        else if(navController.currentDestination?.id == R.id.topicListScreen){
+            finish()
+        }
+        else{
+            if (!navController.popBackStack()) {
+                // Call finish() on your Activity
+                finish()
+            }
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+
+//        val options = navOptions {
+//            anim {
+//                enter = R.anim.slide_in_right
+//                exit = R.anim.slide_out_left
+//                popEnter = R.anim.slide_in_left
+//                popExit = R.anim.slide_out_right
+//            }
+//        }
+
+//        when(id){
+//            R.id.nav_settings ->navController.navigate(R.id.action_homeFragment_to_seetingsFragment, null, options)
+//            R.id.nav_about ->navController.navigate(R.id.action_homeFragment_to_aboutFragment, null, options)
+//        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
