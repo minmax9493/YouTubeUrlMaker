@@ -1,4 +1,4 @@
-package uz.minmax.sampledaggerapp.data.source.local.dao
+package com.example.android.youtubeurlmaker.data.source.local.dao
 
 import androidx.room.*
 
@@ -10,15 +10,7 @@ interface BaseDao<T> {
      * @param obj the object to be inserted.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(obj: T)
-
-    /**
-     * Insert an array of objects in the database.
-     *
-     * @param obj the objects to be inserted.
-     */
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insert(vararg obj: T)
+    suspend fun insert(obj: T):Long
 
     /**
      * Update an object from the database.

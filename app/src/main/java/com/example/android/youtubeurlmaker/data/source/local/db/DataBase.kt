@@ -4,16 +4,22 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.android.youtubeurlmaker.data.source.local.dao.CategoryDao
+import com.example.android.youtubeurlmaker.data.source.local.dao.QuestionDao
+import com.example.android.youtubeurlmaker.data.source.local.dao.TopicDao
+import com.example.android.youtubeurlmaker.data.source.local.entity.Category
+import com.example.android.youtubeurlmaker.data.source.local.entity.Question
 import com.example.android.youtubeurlmaker.data.source.local.entity.Topic
-import uz.minmax.sampledaggerapp.data.source.local.dao.TopicDao
 
 /**
  * Created by murodjon on 2020/04/13
  */
-@Database(entities = [Topic::class], version = 1, exportSchema = false)
+@Database(entities = [Topic::class, Question::class, Category::class], version = 1, exportSchema = false)
 abstract class DataBase : RoomDatabase() {
 
     abstract fun topicDao(): TopicDao
+    abstract fun questionDao():QuestionDao
+    abstract fun categoryDao(): CategoryDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the

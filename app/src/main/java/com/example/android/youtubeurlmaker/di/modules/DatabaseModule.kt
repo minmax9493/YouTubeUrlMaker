@@ -1,17 +1,19 @@
 package com.example.android.youtubeurlmaker.di.modules
 
 import android.content.Context
+import com.example.android.youtubeurlmaker.data.source.local.dao.CategoryDao
+import com.example.android.youtubeurlmaker.data.source.local.dao.QuestionDao
+import com.example.android.youtubeurlmaker.data.source.local.dao.TopicDao
 import com.example.android.youtubeurlmaker.data.source.local.db.DataBase
 import dagger.Module
 import dagger.Provides
-import uz.minmax.sampledaggerapp.data.source.local.dao.TopicDao
 import javax.inject.Singleton
 
 /**
  * Created by Murodjon on 2020.03.11
  */
 @Module
-class RoomDBModule {
+class DatabaseModule {
 
     @Singleton
     @Provides
@@ -19,5 +21,13 @@ class RoomDBModule {
 
     @Singleton
     @Provides
-    fun provideCustomerDao(appDataBase: DataBase): TopicDao = appDataBase.topicDao()
+    fun provideTopicDao(appDataBase: DataBase): TopicDao = appDataBase.topicDao()
+
+    @Singleton
+    @Provides
+    fun provideQuestionDao(appDataBase: DataBase):QuestionDao = appDataBase.questionDao()
+
+    @Singleton
+    @Provides
+    fun provideCategoryDao(appDataBase: DataBase): CategoryDao = appDataBase.categoryDao()
 }

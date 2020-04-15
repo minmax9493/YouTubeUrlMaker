@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/topicEditorScreen">
+    app:startDestination="@id/topicListScreen">
 
     <fragment
         android:id="@+id/topicEditorScreen"
@@ -23,15 +23,4 @@
             app:popUpToInclusive="true"/>
     </fragment>
 
-    <fragment
-        android:id="@+id/splashScreen"
-        android:name="com.example.android.youtubeurlmaker.ui.screens.SplashScreen"
-        android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" >
-        <action
-            android:id="@+id/action_splashScreen_to_topicListScreen"
-            app:destination="@id/topicListScreen"
-            app:popUpTo="@+id/topicListScreen"
-            app:popUpToInclusive="true"/>
-    </fragment>
 </navigation>

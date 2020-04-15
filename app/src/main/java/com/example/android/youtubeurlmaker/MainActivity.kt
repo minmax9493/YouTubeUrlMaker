@@ -1,7 +1,6 @@
 package com.example.android.youtubeurlmaker
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -14,9 +13,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.android.youtubeurlmaker.di.util.DaggerActivity
+import com.example.android.youtubeurlmaker.ui.viewmodels.MainViewModel
 import com.google.android.material.navigation.NavigationView
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNavigationItemSelectedListener {
+
+    @Inject
+    lateinit var viewModel: MainViewModel
 
     lateinit var drawerLayout: DrawerLayout
     lateinit var navigationView: NavigationView
@@ -26,7 +31,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        Log.e("MainActivity", "MainActivity")
 
         toolbar = findViewById(R.id.toolbar)
         toolbar.apply {
@@ -48,13 +54,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             // Update UI to reflect text being shared
             Log.e("MainActivity", "Url: $it")
 
-
             //https://www.youtube.com/embed/KbINHTeJWQw?start=100&end=120&version=3&autoplay=1
             //https://www.youtube.com/embed/[video_id]?start=[start_at_second]&end=[end_at_second]
 
 //            https://stackoverflow.com/questions/4661905/how-to-customize-an-end-time-for-a-youtube-video
-
-
         }
     }
 
@@ -68,7 +71,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             when(destination.id){
-                R.id.splashScreen->supportActionBar?.hide()
+//                R.id.splashScreen->supportActionBar?.hide()
                 R.id.topicListScreen->{
                     supportActionBar?.show()
                     navigationView.visibility = View.VISIBLE

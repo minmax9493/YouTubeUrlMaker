@@ -1,4 +1,4 @@
-package io.youvr.android.pivopresenter.di.scopes
+package com.example.android.youtubeurlmaker.di.scopes
 
 import javax.inject.Scope
 

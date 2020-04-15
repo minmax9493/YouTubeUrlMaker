@@ -1,4 +1,4 @@
-package io.youvr.android.pivopresenter.di.util
+package com.example.android.youtubeurlmaker.di.util
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

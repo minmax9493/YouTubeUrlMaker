@@ -1,24 +1,26 @@
 package com.example.android.youtubeurlmaker.ui.screens
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 
 import com.example.android.youtubeurlmaker.R
+import com.example.android.youtubeurlmaker.di.util.DaggerFragment
+import com.example.android.youtubeurlmaker.ui.viewmodels.TopicEditorViewModel
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class TopicEditorScreen : Fragment() {
+class TopicEditorScreen : DaggerFragment(R.layout.fragment_topic_editor_screen) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_topic_editor_screen, container, false)
+    @Inject lateinit var viewModel:TopicEditorViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        Log.e("TopicEditorScreen", "TopicEditor")
+
     }
-
 }

@@ -1,9 +1,10 @@
-package uz.minmax.sampledaggerapp.data.source.local.dao
+package com.example.android.youtubeurlmaker.data.source.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.android.youtubeurlmaker.data.source.local.dao.BaseDao
 import com.example.android.youtubeurlmaker.data.source.local.entity.Category
 
 @Dao

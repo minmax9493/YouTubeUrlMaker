@@ -20,7 +20,15 @@ data class Topic(
     @SerializedName("name")
     var name:String="",
 
-    @ColumnInfo(name = "type")
-    @SerializedName("type")
-    var url:String=""
+    @ColumnInfo(name = "url")
+    @SerializedName("url")
+    var url:String="",
+
+    @ColumnInfo(name = "created_at")
+    @SerializedName("created_at")
+    var createdAt:String?=null,
+
+    @ColumnInfo(name = "status")
+    @SerializedName("status")
+    var status:String=""
 ): Serializable

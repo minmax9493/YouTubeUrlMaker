@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.android.youtubeurlmaker.data.source.local.entity.Question
-import uz.minmax.sampledaggerapp.data.source.local.dao.BaseDao
 
 /**
  * Created by murodjon on 2020/04/13
