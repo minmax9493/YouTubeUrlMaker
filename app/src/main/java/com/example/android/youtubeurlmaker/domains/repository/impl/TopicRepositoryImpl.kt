@@ -21,10 +21,8 @@ class TopicRepositoryImpl @Inject constructor(private val topicDao: TopicDao,
                                               private val questionDao: QuestionDao,
                                               private val categoryDao: CategoryDao):TopicRepository {
     override suspend fun addTopic(topic: Topic) {
-        Log.e("Repository", "topic: ${topic.name}")
         val id =topicDao.insert(topic)
         Log.e("Repository", "topic: ${topic} $id")
-
     }
 
     override fun getTopics(): LiveData<List<Topic>> {

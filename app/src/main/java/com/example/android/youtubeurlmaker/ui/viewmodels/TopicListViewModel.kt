@@ -11,6 +11,6 @@ interface TopicListViewModel {
     val openEditorLiveData:LiveData<Unit>
     val topicsLiveData:LiveData<List<Topic>>
 
-    fun openTopicEditor()
+    fun openTopicEditor(topic:Topic)
     fun addTopic(url:String, title:String)
 }

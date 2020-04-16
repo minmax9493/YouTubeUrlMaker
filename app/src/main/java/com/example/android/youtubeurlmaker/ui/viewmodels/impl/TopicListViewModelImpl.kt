@@ -24,8 +24,8 @@ class TopicListViewModelImpl @Inject constructor(private val topicListUseCase: T
 
     override val topicsLiveData: LiveData<List<Topic>> = topicListUseCase.getTopics()
 
-    override fun openTopicEditor() {
-
+    override fun openTopicEditor(topic: Topic) {
+        _openEditorLiveData.postValue(Unit)
     }
 
     override fun addTopic(url: String, title: String) {

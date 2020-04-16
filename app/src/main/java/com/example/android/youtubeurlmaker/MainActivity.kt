@@ -54,6 +54,8 @@ class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNa
             // Update UI to reflect text being shared
             Log.e("MainActivity", "Url: $it")
 
+            viewModel.addTopic(it, "Simple Title")
+
             //https://www.youtube.com/embed/KbINHTeJWQw?start=100&end=120&version=3&autoplay=1
             //https://www.youtube.com/embed/[video_id]?start=[start_at_second]&end=[end_at_second]
 

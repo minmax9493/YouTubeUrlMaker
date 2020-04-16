@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -41,9 +42,9 @@ class TopicListScreen : DaggerFragment(R.layout.fragment_topic_list), TopicListA
         }
     }
 
-    private val openEditorObserver = Observer<Unit> {  }
+    private val openEditorObserver = Observer<Unit> { findNavController().navigate(R.id.action_topicListScreen_to_topicEditorScreen) }
 
     override fun onClickListener(view: View, topic: Topic) {
-        Timber.e("onClick: ${topic.name}")
+        viewModel.openTopicEditor(topic)
     }
 }
