@@ -42,7 +42,10 @@ class TopicListScreen : DaggerFragment(R.layout.fragment_topic_list), TopicListA
         }
     }
 
-    private val openEditorObserver = Observer<Unit> { findNavController().navigate(R.id.action_topicListScreen_to_topicEditorScreen) }
+    private val openEditorObserver = Observer<Unit> {
+
+        findNavController().navigate(R.id.action_topicListScreen_to_topicEditorScreen)
+    }
 
     override fun onClickListener(view: View, topic: Topic) {
         viewModel.openTopicEditor(topic)
