@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.youtubeurlmaker.R
 import com.example.android.youtubeurlmaker.data.source.local.entity.Question
+import com.example.android.youtubeurlmaker.util.formattedDate
 
 /**
  * Created by murodjon on 2020/04/14
@@ -25,8 +26,8 @@ class QuestionsAdapter(
 
         fun bindItem(question: Question){
             nameView.text = question.name
-            dateView.text = question.createdAt.toString()
-            statusView.text = question.url
+            dateView.text = question.createdAt?.formattedDate() ?: ""
+            statusView.text = ""
 
             itemView.setOnClickListener {
                 listener.onClickListener(it, question)
@@ -39,7 +40,7 @@ class QuestionsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflateView = parent.inflate(R.layout.topic_list_item, false)
+        val inflateView = parent.inflate(R.layout.question_item, false)
         return ViewHolder(inflateView)
     }
 

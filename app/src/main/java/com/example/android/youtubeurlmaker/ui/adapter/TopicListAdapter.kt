@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.youtubeurlmaker.R
 import com.example.android.youtubeurlmaker.data.source.local.entity.Topic
+import com.example.android.youtubeurlmaker.util.formattedDate
 
 /**
  * Created by murodjon on 2020/04/14
@@ -25,7 +26,7 @@ class TopicListAdapter(
 
         fun bindItem(topic: Topic){
             nameView.text = topic.name
-            dateView.text = topic.createdAt.toString()
+            dateView.text = topic.createdAt?.formattedDate() ?: ""
             statusView.text = topic.status
 
             itemView.setOnClickListener {

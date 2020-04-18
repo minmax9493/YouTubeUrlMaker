@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -18,7 +17,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.android.youtubeurlmaker.di.util.DaggerActivity
 import com.example.android.youtubeurlmaker.ui.viewmodels.MainViewModel
 import com.google.android.material.navigation.NavigationView
+import com.google.gson.JsonObject
+import com.koushikdutta.async.future.FutureCallback
+import com.koushikdutta.ion.Ion
+import org.json.JSONObject
 import javax.inject.Inject
+
 
 class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNavigationItemSelectedListener {
 
@@ -51,7 +55,18 @@ class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNa
     private fun handleSendText(intent: Intent) {
         intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
             // Update UI to reflect text being shared
-            viewModel.addTopic(it, "Simple Title")
+
+            Ion.with(this)
+                .load("http://www.youtube.com/oembed?url=$it&format=json")
+                .asString()
+                .setCallback(FutureCallback<String?> { e, result ->
+                    if(e==null && result!=null){
+                        val youtubeObj = JSONObject(result)
+                        viewModel.addTopic(it, youtubeObj.getString("title"))
+                    }else{
+                        viewModel.addTopic(it, "No title")
+                    }
+                })
 
             //https://www.youtube.com/embed/KbINHTeJWQw?start=100&end=120&version=3&autoplay=1
             //https://www.youtube.com/embed/[video_id]?start=[start_at_second]&end=[end_at_second]

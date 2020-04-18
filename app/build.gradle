@@ -35,6 +35,12 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     /**
+     * Android Asynchronous Networking and Image Loading
+     * https://github.com/koush/ion
+     */
+    implementation 'com.koushikdutta.ion:ion:2.2.1'
+
+    /**
      * YouTubePlayer dependency
      */
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
