@@ -2,12 +2,10 @@ package com.example.android.youtubeurlmaker.ui.screens
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 
 import com.example.android.youtubeurlmaker.R
-import com.example.android.youtubeurlmaker.data.source.local.entity.Category
 import com.example.android.youtubeurlmaker.data.source.local.entity.Question
 import com.example.android.youtubeurlmaker.data.source.local.entity.Topic
 import com.example.android.youtubeurlmaker.di.util.DaggerFragment
@@ -15,10 +13,16 @@ import com.example.android.youtubeurlmaker.ui.viewmodels.TopicEditorViewModel
 import com.example.android.youtubeurlmaker.util.YouTubeHelper
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import kotlinx.android.synthetic.main.activity_video_play_editor.*
 import kotlinx.android.synthetic.main.fragment_topic_editor_screen.*
-import timber.log.Timber
+import kotlinx.android.synthetic.main.fragment_topic_editor_screen.btn_add
+import kotlinx.android.synthetic.main.fragment_topic_editor_screen.btn_save
+import kotlinx.android.synthetic.main.fragment_topic_editor_screen.btn_share
+import kotlinx.android.synthetic.main.fragment_topic_editor_screen.min_input_view
+import kotlinx.android.synthetic.main.fragment_topic_editor_screen.partial_video_title_video_view
+import kotlinx.android.synthetic.main.fragment_topic_editor_screen.second_input_view
+import kotlinx.android.synthetic.main.fragment_topic_editor_screen.youtube_player_view
+import kotlinx.android.synthetic.main.youtube_player_dialog.*
 import java.util.*
 import javax.inject.Inject
 
@@ -56,6 +60,13 @@ class TopicEditorScreen : DaggerFragment(R.layout.fragment_topic_editor_screen) 
         }
 
         btn_add.setOnClickListener {  }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(youtube_player_view!=null){
+            youtube_player_view.release()
+        }
     }
 
     private fun save():Question{

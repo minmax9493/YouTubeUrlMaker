@@ -16,5 +16,12 @@
     <string name="categories">Categories</string>
     <string name="saved_list">Saved listings</string>
     <string name="editor">Editor</string>
+    <string name="add_question">Add question</string>
+    <string name="new_video">New Video</string>
+    <string name="title">Title</string>
+    <string name="paste_url">Paste URL</string>
+    <string name="empty_space_not_allowed">Empty space is not allowed.</string>
+    <string name="url_not_valid">YouTube url is not valid.</string>
+    <string name="partial_video_listing">Partial Video Listing</string>
 </resources>
 

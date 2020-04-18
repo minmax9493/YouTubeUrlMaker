@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.navOptions
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -32,11 +34,8 @@ class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.e("MainActivity", "MainActivity")
-
         toolbar = findViewById(R.id.toolbar)
         toolbar.apply {
-            title = "Tube Note"
             setSupportActionBar(this)
         }
 
@@ -52,8 +51,6 @@ class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNa
     private fun handleSendText(intent: Intent) {
         intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
             // Update UI to reflect text being shared
-            Log.e("MainActivity", "Url: $it")
-
             viewModel.addTopic(it, "Simple Title")
 
             //https://www.youtube.com/embed/KbINHTeJWQw?start=100&end=120&version=3&autoplay=1
@@ -73,12 +70,20 @@ class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNa
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             when(destination.id){
-//                R.id.splashScreen->supportActionBar?.hide()
+                R.id.topicEditorScreen->{
+                    supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+                    supportActionBar!!.setHomeButtonEnabled(false)
+                }
                 R.id.topicListScreen->{
                     supportActionBar?.show()
                     navigationView.visibility = View.VISIBLE
                     drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED)
-                }else->{
+                }
+                R.id.questionsScreen->{
+                    supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+                    supportActionBar!!.setHomeButtonEnabled(false)
+                }
+                else->{
                 supportActionBar?.show()
             }
             }
@@ -86,7 +91,7 @@ class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNa
 
         navigationView.setNavigationItemSelectedListener(this)
 
-        val topLevelDestinations = setOf(R.id.topicListScreen, R.id.topicEditorScreen)
+        val topLevelDestinations = setOf(R.id.topicListScreen)
         appBarConfiguration = AppBarConfiguration.Builder(topLevelDestinations)
             .setDrawerLayout(drawerLayout)
             .build()
@@ -110,21 +115,22 @@ class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNa
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        Log.e("MainActicity", "onNavigationItemSelected: ${item.itemId} ")
         val id = item.itemId
 
-//        val options = navOptions {
-//            anim {
-//                enter = R.anim.slide_in_right
-//                exit = R.anim.slide_out_left
-//                popEnter = R.anim.slide_in_left
-//                popExit = R.anim.slide_out_right
-//            }
-//        }
+        val options = navOptions {
+            anim {
+                enter = R.anim.slide_in_right
+                exit = R.anim.slide_out_left
+                popEnter = R.anim.slide_in_left
+                popExit = R.anim.slide_out_right
+            }
+        }
 
-//        when(id){
-//            R.id.nav_settings ->navController.navigate(R.id.action_homeFragment_to_seetingsFragment, null, options)
+        when(id){
+            R.id.nav_questions ->navController.navigate(R.id.action_topicListScreen_to_questionsScreen, null, options)
 //            R.id.nav_about ->navController.navigate(R.id.action_homeFragment_to_aboutFragment, null, options)
-//        }
+        }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }

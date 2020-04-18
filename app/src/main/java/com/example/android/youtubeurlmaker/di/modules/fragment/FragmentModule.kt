@@ -1,6 +1,7 @@
 package com.example.android.youtubeurlmaker.di.modules.fragment
 
 import com.example.android.youtubeurlmaker.di.scopes.FragmentScope
+import com.example.android.youtubeurlmaker.ui.screens.QuestionsScreen
 import com.example.android.youtubeurlmaker.ui.screens.SplashScreen
 import com.example.android.youtubeurlmaker.ui.screens.TopicEditorScreen
 import com.example.android.youtubeurlmaker.ui.screens.TopicListScreen
@@ -24,4 +25,8 @@ interface FragmentModule {
     @FragmentScope
     @ContributesAndroidInjector(modules = [ViewModelModule::class, ViewModelImplModule::class, UseCaseModule::class])
     fun contributeTopicEditorScreen():TopicEditorScreen
+
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [ViewModelModule::class, ViewModelImplModule::class, UseCaseModule::class])
+    fun contributeQuestionScreen():QuestionsScreen
 }

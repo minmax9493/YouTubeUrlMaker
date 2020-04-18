@@ -1,7 +1,9 @@
 package com.example.android.youtubeurlmaker.di.modules.fragment
 
+import android.view.ViewDebug
 import com.example.android.youtubeurlmaker.di.scopes.FragmentScope
 import com.example.android.youtubeurlmaker.di.util.ViewModelKey
+import com.example.android.youtubeurlmaker.ui.viewmodels.impl.QuestionViewModelImpl
 import com.example.android.youtubeurlmaker.ui.viewmodels.impl.SplashViewModelImpl
 import com.example.android.youtubeurlmaker.ui.viewmodels.impl.TopicEditorViewModelImpl
 import com.example.android.youtubeurlmaker.ui.viewmodels.impl.TopicListViewModelImpl
@@ -31,4 +33,10 @@ interface ViewModelImplModule {
     @IntoMap
     @ViewModelKey(TopicEditorViewModelImpl::class)
     fun topicEditorViewModelImpl(impl: TopicEditorViewModelImpl):TopicEditorViewModelImpl
+
+    @FragmentScope
+    @Binds
+    @IntoMap
+    @ViewModelKey(QuestionViewModelImpl::class)
+    fun getQuestionViewModelImpl(impl:QuestionViewModelImpl):QuestionViewModelImpl
 }

@@ -27,6 +27,18 @@
                 app:argType="com.example.android.youtubeurlmaker.data.source.local.entity.Topic"
                 />
         </action>
+        <action
+            android:id="@+id/action_topicListScreen_to_questionsScreen"
+            app:destination="@id/questionsScreen"
+            app:popUpTo="@+id/topicEditorScreen"
+            app:popUpToInclusive="true"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/questionsScreen"
+        android:name="com.example.android.youtubeurlmaker.ui.screens.QuestionsScreen"
+        android:label="@string/partial_video_listing"
+        tools:layout="@layout/fragment_questions_screen" />
+
 
 </navigation>

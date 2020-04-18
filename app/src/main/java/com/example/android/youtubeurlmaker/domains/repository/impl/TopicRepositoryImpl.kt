@@ -1,8 +1,6 @@
 package com.example.android.youtubeurlmaker.domains.repository.impl
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.android.youtubeurlmaker.data.source.local.dao.CategoryDao
 import com.example.android.youtubeurlmaker.data.source.local.dao.QuestionDao
 import com.example.android.youtubeurlmaker.data.source.local.dao.TopicDao
@@ -26,6 +24,10 @@ class TopicRepositoryImpl @Inject constructor(private val topicDao: TopicDao,
 
     override fun getTopics(): LiveData<List<Topic>> {
         return topicDao.getTopics()
+    }
+
+    override fun getQuestions(): LiveData<List<Question>> {
+        return questionDao.getQuestions()
     }
 
     override suspend fun deleteTopic(topic: Topic) {
@@ -59,4 +61,5 @@ class TopicRepositoryImpl @Inject constructor(private val topicDao: TopicDao,
     override suspend fun getCategories(): LiveData<List<Category>> {
         return categoryDao.getCategories()
     }
+
 }
