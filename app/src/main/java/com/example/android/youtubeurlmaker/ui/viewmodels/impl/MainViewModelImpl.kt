@@ -8,6 +8,7 @@ import com.example.android.youtubeurlmaker.domains.usecase.AddTopicUseCase
 import com.example.android.youtubeurlmaker.ui.viewmodels.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -21,6 +22,7 @@ class MainViewModelImpl @Inject constructor(private val topicUseCase: AddTopicUs
             topic.name = title
             topic.url = url
             topic.status = "Not Complete"
+            topic.createdAt = Date()
 
             topicUseCase.addTopic(topic)
 

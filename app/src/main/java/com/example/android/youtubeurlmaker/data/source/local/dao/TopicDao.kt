@@ -9,7 +9,7 @@ import com.example.android.youtubeurlmaker.data.source.local.entity.Topic
 @Dao
 interface TopicDao: BaseDao<Topic> {
 
-    @Query("select * from topic_table order by name ASC")
+    @Query("select * from topic_table order by created_at DESC")
     fun getTopics(): LiveData<List<Topic>>
 
     @Insert

@@ -11,8 +11,8 @@ interface TopicEditorViewModel {
     val categoriesLiveData:LiveData<List<Category>>
     val questionsLiveData:LiveData<List<Question>>
 
-    fun addNewCategory()
-    fun addQuestion()
-    fun deleteQuestion()
-    fun editQuestion()
+    fun addNewCategory(category: Category)
+    fun addQuestion(question: Question)
+    fun deleteQuestion(question: Question)
+    fun editQuestion(question: Question)
 }

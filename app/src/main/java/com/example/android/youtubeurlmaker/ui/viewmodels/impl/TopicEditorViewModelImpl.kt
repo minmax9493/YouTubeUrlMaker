@@ -3,10 +3,13 @@ package com.example.android.youtubeurlmaker.ui.viewmodels.impl
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.android.youtubeurlmaker.data.source.local.entity.Category
 import com.example.android.youtubeurlmaker.data.source.local.entity.Question
 import com.example.android.youtubeurlmaker.domains.usecase.TopicEditorUseCase
 import com.example.android.youtubeurlmaker.ui.viewmodels.TopicEditorViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -21,20 +24,28 @@ class TopicEditorViewModelImpl @Inject constructor(private val topicEditorUseCas
     override val questionsLiveData: LiveData<List<Question>>
         get() = _questionsLiveData
 
-    override fun addNewCategory() {
-        TODO("Not yet implemented")
+    override fun addNewCategory(category: Category) {
+        viewModelScope.launch(Dispatchers.IO) {
+            topicEditorUseCase.addCategory(category)
+        }
     }
 
-    override fun addQuestion() {
-        TODO("Not yet implemented")
+    override fun addQuestion(question: Question) {
+        viewModelScope.launch(Dispatchers.IO) {
+            topicEditorUseCase.addQuestion(question)
+        }
     }
 
-    override fun deleteQuestion() {
-        TODO("Not yet implemented")
+    override fun deleteQuestion(question: Question) {
+        viewModelScope.launch(Dispatchers.IO) {
+            topicEditorUseCase.deleteQuestion(question)
+        }
     }
 
-    override fun editQuestion() {
-        TODO("Not yet implemented")
+    override fun editQuestion(question: Question) {
+        viewModelScope.launch(Dispatchers.IO) {
+            topicEditorUseCase.editQuestion(question)
+        }
     }
 
 }

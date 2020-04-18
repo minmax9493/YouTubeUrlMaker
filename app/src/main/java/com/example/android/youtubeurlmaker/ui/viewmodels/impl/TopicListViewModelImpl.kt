@@ -16,16 +16,16 @@ import javax.inject.Inject
  * Created by murodjon on 2020/04/14
  */
 class TopicListViewModelImpl @Inject constructor(private val topicListUseCase: TopicListUseCase) : ViewModel(), TopicListViewModel {
-    private val _openEditorLiveData = MutableLiveData<Unit>()
+    private val _openEditorLiveData = MutableLiveData<Topic>()
     private val _topicsLiveData = MutableLiveData<List<Topic>>()
 
-    override val openEditorLiveData: LiveData<Unit>
+    override val openEditorLiveData: LiveData<Topic>
         get() = _openEditorLiveData
 
     override val topicsLiveData: LiveData<List<Topic>> = topicListUseCase.getTopics()
 
     override fun openTopicEditor(topic: Topic) {
-        _openEditorLiveData.postValue(Unit)
+        _openEditorLiveData.postValue(topic)
     }
 
     override fun addTopic(url: String, title: String) {

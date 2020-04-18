@@ -15,6 +15,8 @@ interface TopicEditorUseCase {
 
     suspend fun deleteQuestion(question: Question)
 
+    suspend fun editQuestion(question:Question)
+
     suspend fun getQuestions(topic: Topic):LiveData<List<Question>>
 
     suspend fun addCategory(category: Category)

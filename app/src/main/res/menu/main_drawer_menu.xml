@@ -3,12 +3,12 @@
 
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_transactions"
-            android:title="Transactions"
+            android:id="@+id/nav_questions"
+            android:title="@string/questions"
             />
         <item
-            android:id="@+id/nav_settings"
-            android:title="Settings" />
+            android:id="@+id/nav_categories"
+            android:title="@string/categories" />
     </group>
 
     <item android:title="Communicate">

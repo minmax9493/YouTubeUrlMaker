@@ -26,7 +26,6 @@ class VideoPlayEditorActivity : AppCompatActivity() {
             }
         })
 
-
         btn_save.setOnClickListener {  }
 
         btn_share.setOnClickListener {

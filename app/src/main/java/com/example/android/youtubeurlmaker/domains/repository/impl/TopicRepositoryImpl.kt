@@ -22,7 +22,6 @@ class TopicRepositoryImpl @Inject constructor(private val topicDao: TopicDao,
                                               private val categoryDao: CategoryDao):TopicRepository {
     override suspend fun addTopic(topic: Topic) {
         val id =topicDao.insert(topic)
-        Log.e("Repository", "topic: ${topic} $id")
     }
 
     override fun getTopics(): LiveData<List<Topic>> {
@@ -39,6 +38,10 @@ class TopicRepositoryImpl @Inject constructor(private val topicDao: TopicDao,
 
     override suspend fun deleteQuestion(question: Question) {
         questionDao.delete(question)
+    }
+
+    override suspend fun editQuestion(question: Question) {
+        questionDao.update(question)
     }
 
     override suspend fun getQuestions(topic: Topic): LiveData<List<Question>> {

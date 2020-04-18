@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+import java.util.*
 
 /**
  * Created by murodjon on 2020/04/13
@@ -26,7 +27,7 @@ data class Topic(
 
     @ColumnInfo(name = "created_at")
     @SerializedName("created_at")
-    var createdAt:String?=null,
+    var createdAt:Date?=null,
 
     @ColumnInfo(name = "status")
     @SerializedName("status")
