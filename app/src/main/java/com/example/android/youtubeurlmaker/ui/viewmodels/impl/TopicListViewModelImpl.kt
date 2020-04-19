@@ -29,4 +29,10 @@ class TopicListViewModelImpl @Inject constructor(private val topicListUseCase: T
         }
     }
 
+    override fun deleteTopic(topic: Topic) {
+        viewModelScope.launch(Dispatchers.IO) {
+            topicListUseCase.deleteTopic(topic)
+        }
+    }
+
 }

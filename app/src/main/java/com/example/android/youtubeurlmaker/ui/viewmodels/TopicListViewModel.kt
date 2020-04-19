@@ -11,4 +11,5 @@ interface TopicListViewModel {
     val topicsLiveData:LiveData<List<Topic>>
 
     fun addTopic(url:String, title:String)
+    fun deleteTopic(topic: Topic)
 }

@@ -23,5 +23,10 @@
     <string name="empty_space_not_allowed">Empty space is not allowed.</string>
     <string name="url_not_valid">YouTube url is not valid.</string>
     <string name="partial_video_listing">Partial Video Listing</string>
+
+    <string name="action_share">Share</string>
+    <string name="action_play">Play</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_editor">Go to editor</string>
 </resources>
 

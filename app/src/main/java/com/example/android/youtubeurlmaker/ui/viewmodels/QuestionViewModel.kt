@@ -8,4 +8,6 @@ import com.example.android.youtubeurlmaker.data.source.local.entity.Question
  */
 interface QuestionViewModel {
     val questionsLiveData:LiveData<List<Question>>
+
+    fun deleteQuestion(question: Question)
 }

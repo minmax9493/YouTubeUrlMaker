@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.youtubeurlmaker.R
 import com.example.android.youtubeurlmaker.data.source.local.entity.Question
+import com.example.android.youtubeurlmaker.data.source.local.entity.Topic
 import com.example.android.youtubeurlmaker.di.util.DaggerFragment
 import com.example.android.youtubeurlmaker.ui.adapter.ItemClickListener
 import com.example.android.youtubeurlmaker.ui.adapter.QuestionsAdapter
+import com.example.android.youtubeurlmaker.ui.dialogs.ActionBottomDialogFragment
+import com.example.android.youtubeurlmaker.ui.dialogs.QuestionBottomSheetDialog
 import com.example.android.youtubeurlmaker.ui.dialogs.YoutubePlayerDialog
 import com.example.android.youtubeurlmaker.ui.viewmodels.QuestionViewModel
 import kotlinx.android.synthetic.main.fragment_questions_screen.*
@@ -19,7 +22,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class QuestionsScreen : DaggerFragment(R.layout.fragment_questions_screen), ItemClickListener<Question> {
+class QuestionsScreen : DaggerFragment(R.layout.fragment_questions_screen), ItemClickListener<Question>, QuestionBottomSheetDialog.ItemClickListener {
 
     @Inject lateinit var viewModel:QuestionViewModel
 
@@ -35,14 +38,33 @@ class QuestionsScreen : DaggerFragment(R.layout.fragment_questions_screen), Item
         })
     }
 
-    override fun onClickListener(view: View, t: Question) {
+    override fun share(question: Question) {
+        TODO("Not yet implemented")
+    }
+
+    override fun play(question: Question) {
         val dialog = YoutubePlayerDialog()
-        dialog.setQuestion(t)
+        dialog.setData(question)
         dialog.setListener(f = {
             kotlin.run{
-             dialog.dismiss()
+                dialog.dismiss()
             }
         })
         dialog.show(childFragmentManager, "")
+    }
+
+    override fun edit(question: Question) {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(question: Question) {
+        viewModel.deleteQuestion(question)
+    }
+
+    override fun onClickListener(view: View, t: Question) {
+        val bottomDialogFragment = QuestionBottomSheetDialog.newInstance()
+        bottomDialogFragment.setListener(this)
+        bottomDialogFragment.setData(t)
+        bottomDialogFragment.show(childFragmentManager, QuestionBottomSheetDialog.TAG)
     }
 }

@@ -13,7 +13,7 @@ import com.example.android.youtubeurlmaker.ui.viewmodels.TopicEditorViewModel
 import com.example.android.youtubeurlmaker.util.YouTubeHelper
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import kotlinx.android.synthetic.main.activity_video_play_editor.*
+import kotlinx.android.synthetic.main.activity_launcher.*
 import kotlinx.android.synthetic.main.fragment_topic_editor_screen.*
 import kotlinx.android.synthetic.main.fragment_topic_editor_screen.btn_add
 import kotlinx.android.synthetic.main.fragment_topic_editor_screen.btn_save
@@ -77,12 +77,13 @@ class TopicEditorScreen : DaggerFragment(R.layout.fragment_topic_editor_screen) 
         question.createdAt = Date()
         question.topicId = topic.id
         viewModel.addQuestion(question)
+        clear()
         return question
     }
 
     private fun share(){
         val question = save()
-
+        clear()
         val shareContent = "Title: ${question.name}\nUrl: ${question.url}"
 
         val sendIntent: Intent = Intent().apply {
@@ -116,5 +117,11 @@ class TopicEditorScreen : DaggerFragment(R.layout.fragment_topic_editor_screen) 
         }
 
         return "http://www.youtube.com/watch?v=${videoId}&t=${time}"
+    }
+
+    private fun clear(){
+        partial_video_title_video_view.text.clear()
+        min_input_view.text.clear()
+        second_input_view.text.clear()
     }
 }

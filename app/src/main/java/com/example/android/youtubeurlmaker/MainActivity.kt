@@ -1,5 +1,6 @@
 package com.example.android.youtubeurlmaker
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -53,6 +54,7 @@ class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNa
     }
 
     private fun handleSendText(intent: Intent) {
+
         intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
             // Update UI to reflect text being shared
 
@@ -119,18 +121,19 @@ class MainActivity : DaggerActivity(R.layout.activity_main), NavigationView.OnNa
             drawerLayout.closeDrawer(GravityCompat.START)
         }
         else if(navController.currentDestination?.id == R.id.topicListScreen){
+            setResult(Activity.RESULT_CANCELED)
             finish()
         }
         else{
             if (!navController.popBackStack()) {
                 // Call finish() on your Activity
+                setResult(Activity.RESULT_CANCELED)
                 finish()
             }
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        Log.e("MainActicity", "onNavigationItemSelected: ${item.itemId} ")
         val id = item.itemId
 
         val options = navOptions {

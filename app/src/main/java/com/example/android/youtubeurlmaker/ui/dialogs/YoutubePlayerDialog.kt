@@ -10,6 +10,7 @@ import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.example.android.youtubeurlmaker.R
 import com.example.android.youtubeurlmaker.data.source.local.entity.Question
+import com.example.android.youtubeurlmaker.data.source.local.entity.Topic
 import com.example.android.youtubeurlmaker.util.YouTubeHelper
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -24,7 +25,8 @@ class YoutubePlayerDialog:DialogFragment() {
     private var listener:(()->Unit)?=null
 
     companion object{
-        private lateinit var question: Question
+        private var question: Question?=null
+        private var topic:Topic?=null
     }
 
     override fun onCreateView(
@@ -48,7 +50,12 @@ class YoutubePlayerDialog:DialogFragment() {
         //webview
         youtube_player_view.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = YouTubeHelper.extractVideoIdFromUrl(question.url)
+                var videoId:String?=null
+                if (question!=null){
+                    videoId = YouTubeHelper.extractVideoIdFromUrl(question!!.url)
+                }else{
+                    videoId = YouTubeHelper.extractVideoIdFromUrl(topic!!.url)
+                }
                 videoId?.let {
                     youTubePlayer.loadVideo(it, 0f)
                     youTubePlayer.play()
@@ -69,8 +76,12 @@ class YoutubePlayerDialog:DialogFragment() {
         listener = f
     }
 
-    fun setQuestion(question1: Question){
-        question = question1
+    fun <T> setData(t: T){
+        when (t){
+            is Question->question = t
+            is Topic-> topic = t
+        }
+
     }
 
     override fun onDestroyView() {

@@ -9,4 +9,5 @@ import com.example.android.youtubeurlmaker.data.source.local.entity.Topic
 interface TopicListUseCase {
     suspend fun addTopic(topic: Topic)
     fun getTopics():LiveData<List<Topic>>
+    suspend fun deleteTopic(topic: Topic)
 }

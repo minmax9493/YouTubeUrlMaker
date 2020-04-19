@@ -8,4 +8,5 @@ import com.example.android.youtubeurlmaker.data.source.local.entity.Question
  */
 interface QuestionUseCase {
     fun getQuestions():LiveData<List<Question>>
+    suspend fun deleteQuestion(question: Question)
 }
