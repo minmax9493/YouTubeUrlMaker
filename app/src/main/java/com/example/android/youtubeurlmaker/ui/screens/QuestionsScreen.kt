@@ -1,5 +1,6 @@
 package com.example.android.youtubeurlmaker.ui.screens
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -39,7 +40,16 @@ class QuestionsScreen : DaggerFragment(R.layout.fragment_questions_screen), Item
     }
 
     override fun share(question: Question) {
-        TODO("Not yet implemented")
+        val shareContent = "Title: ${question.name}\nUrl: ${question.url}"
+
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, shareContent)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, "Send to")
+        startActivity(shareIntent)
     }
 
     override fun play(question: Question) {
