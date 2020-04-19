@@ -1,2 +1,2 @@
-# YouTubeUrlMaker
-YouTube url maker
+# Easy Share
+This is a just simple app.
