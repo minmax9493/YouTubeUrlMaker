@@ -1,20 +1,21 @@
 package com.example.android.youtubeurlmaker.ui.dialogs
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import com.example.android.youtubeurlmaker.R
 import com.example.android.youtubeurlmaker.data.source.local.entity.Question
 import com.example.android.youtubeurlmaker.data.source.local.entity.Topic
 import com.example.android.youtubeurlmaker.util.YouTubeHelper
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerTracker
 import kotlinx.android.synthetic.main.youtube_player_dialog.*
+import android.util.Log
+import com.example.android.youtubeurlmaker.R
+import java.util.regex.Pattern
 
 
 /**
@@ -50,21 +51,33 @@ class YoutubePlayerDialog:DialogFragment() {
         //webview
         youtube_player_view.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                var videoId:String?=null
+                var videoId: String?
                 if (question!=null){
                     videoId = YouTubeHelper.extractVideoIdFromUrl(question!!.url)
+
+                    val regex = "^https?:\\/\\/.*(?:youtu.be\\/|v\\/|u\\/\\w\\/|embed\\/|watch?v=)([^#&?]*).*(?>t=([0-9]+)).*\$"
+                    val p = Pattern.compile(regex)
+                    val m = p.matcher(question!!.url)
+                    while (m.find()) {
+                       Log.e("TAG", "group: "+m.group())
+                    }
                 }else{
                     videoId = YouTubeHelper.extractVideoIdFromUrl(topic!!.url)
                 }
+
                 videoId?.let {
                     youTubePlayer.loadVideo(it, 0f)
                     youTubePlayer.play()
+
+
 
 //                    val tracker = YouTubePlayerTracker()
 //                    youTubePlayer.addListener(tracker)
 //
 //                    tracker.state
 //                    tracker.currentSecond
+
+
 //                    tracker.videoDuration
 //                    tracker.videoId
                 }

@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.android.youtubeurlmaker.data.source.local.converter.Converters
 import com.example.android.youtubeurlmaker.data.source.local.converter.DateConverter
 import com.example.android.youtubeurlmaker.data.source.local.dao.CategoryDao
 import com.example.android.youtubeurlmaker.data.source.local.dao.QuestionDao
@@ -24,7 +25,7 @@ import com.example.android.youtubeurlmaker.data.source.local.entity.Topic
     Category::class],
     version = 3,
     exportSchema = false)
-@TypeConverters(DateConverter::class)
+@TypeConverters(Converters::class)
 abstract class DataBase : RoomDatabase() {
 
     abstract fun topicDao(): TopicDao
