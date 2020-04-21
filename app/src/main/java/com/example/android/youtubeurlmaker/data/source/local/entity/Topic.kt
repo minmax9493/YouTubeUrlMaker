@@ -25,6 +25,10 @@ data class Topic(
     @SerializedName("url")
     var url:String="",
 
+    @ColumnInfo(name = "url_settings")
+    @SerializedName("url_settings")
+    var urlSettings: YouTubeUrlSettings?=null,
+
     @ColumnInfo(name = "created_at")
     @SerializedName("created_at")
     var createdAt:Date?=null,

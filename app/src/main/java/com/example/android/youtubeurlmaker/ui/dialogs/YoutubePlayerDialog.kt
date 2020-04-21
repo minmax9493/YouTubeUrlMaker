@@ -15,6 +15,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTube
 import kotlinx.android.synthetic.main.youtube_player_dialog.*
 import android.util.Log
 import com.example.android.youtubeurlmaker.R
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
 import java.util.regex.Pattern
 
 
@@ -49,27 +50,20 @@ class YoutubePlayerDialog:DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //webview
-        youtube_player_view.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                var videoId: String?
+        youtube_player_view.getYouTubePlayerWhenReady(youTubePlayerCallback = object :YouTubePlayerCallback{
+            override fun onYouTubePlayer(youTubePlayer: YouTubePlayer) {
+                val videoId: String?
+                var startTime=0
                 if (question!=null){
-                    videoId = YouTubeHelper.extractVideoIdFromUrl(question!!.url)
-
-                    val regex = "^https?:\\/\\/.*(?:youtu.be\\/|v\\/|u\\/\\w\\/|embed\\/|watch?v=)([^#&?]*).*(?>t=([0-9]+)).*\$"
-                    val p = Pattern.compile(regex)
-                    val m = p.matcher(question!!.url)
-                    while (m.find()) {
-                       Log.e("TAG", "group: "+m.group())
-                    }
+                    videoId = question!!.urlSettings!!.videoId
+                    startTime = question!!.urlSettings?.startTime ?: 0
                 }else{
                     videoId = YouTubeHelper.extractVideoIdFromUrl(topic!!.url)
                 }
 
                 videoId?.let {
-                    youTubePlayer.loadVideo(it, 0f)
+                    youTubePlayer.loadVideo(it, startTime.toFloat())
                     youTubePlayer.play()
-
-
 
 //                    val tracker = YouTubePlayerTracker()
 //                    youTubePlayer.addListener(tracker)

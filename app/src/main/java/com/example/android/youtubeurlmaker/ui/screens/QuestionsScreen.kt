@@ -40,7 +40,9 @@ class QuestionsScreen : DaggerFragment(R.layout.fragment_questions_screen), Item
     }
 
     override fun share(question: Question) {
-        val shareContent = "Title: ${question.name}\nUrl: ${question.url}"
+        var url = "http://www.youtube.com/watch?v=${question?.urlSettings?.startTime}&t=${question?.urlSettings?.startTime}s"
+
+        val shareContent = "Title: ${question.name}\nUrl: $url"
 
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND

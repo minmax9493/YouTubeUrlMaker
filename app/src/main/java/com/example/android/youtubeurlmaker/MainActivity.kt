@@ -17,7 +17,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.android.youtubeurlmaker.di.util.DaggerActivity
 import com.example.android.youtubeurlmaker.ui.viewmodels.MainViewModel
 import com.google.android.material.navigation.NavigationView
-import com.google.gson.JsonObject
 import com.koushikdutta.async.future.FutureCallback
 import com.koushikdutta.ion.Ion
 import org.json.JSONObject

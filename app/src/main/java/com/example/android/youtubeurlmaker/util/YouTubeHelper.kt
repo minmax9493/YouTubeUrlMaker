@@ -13,7 +13,7 @@ object YouTubeHelper {
         "\\?vi?=([^&]*)",
         "watch\\?.*v=([^&]*)",
         "(?:embed|vi?)/([^/?]*)",
-        "^([A-Za-z0-9\\-]*)"
+        "^([A-Za-z0-9\\-\\_]*)"
     )
 
     fun extractVideoIdFromUrl(url: String): String? {

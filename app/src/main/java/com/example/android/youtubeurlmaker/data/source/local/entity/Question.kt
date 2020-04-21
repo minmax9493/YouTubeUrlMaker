@@ -25,6 +25,10 @@ data class Question(
     @SerializedName("url")
     var url:String="",
 
+    @ColumnInfo(name = "youtube_url_settings")
+    @SerializedName("youtube_url_settings")
+    var urlSettings: YouTubeUrlSettings?= null,
+
     @ColumnInfo(name = "topicId")
     @SerializedName("topicId")
     var topicId:Long?=null,

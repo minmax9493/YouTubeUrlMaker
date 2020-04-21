@@ -20,9 +20,9 @@ class Converters {
     }
 
     @TypeConverter
-    fun youTubeUrlSettingsToString(settings: YouTubeUrlSettings):String?{
+    fun youTubeUrlSettingsToString(settings: YouTubeUrlSettings?):String?{
         val gson = Gson()
-        return gson.toJson(settings)
+        return if(settings == null) null else gson.toJson(settings)
     }
 
     @TypeConverter
